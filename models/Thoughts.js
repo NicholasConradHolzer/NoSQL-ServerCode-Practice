@@ -8,10 +8,10 @@ const dateFormat = require('../utils/dateFormat');
 // const { truckMonster } = require('fontawesome');
 
 const ReactionSchema = new Schema({
-    // reactionId: {
-    //     type: Schema.Types.ObjectId,
-    //     default: () => new Types.ObjectId()
-    // },
+    reactionId: {
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId()
+    },
     reactionBody:{
         type: String,
         required: "Reactions require Text Input",
@@ -53,7 +53,7 @@ const ThoughtSchema = new Schema({
         default: Date.now,
         get: (createdAtVal) => dateFormat(createdAtVal)
     },
-    reactions: [ReactionSchema],
+    reactions: [ ReactionSchema ]
     },
 {
     toJSON:{
@@ -68,5 +68,5 @@ ThoughtSchema.virtual('reactionCount').get(function(){
     return this.reactions.length})
 
     
-const Thought = model('Thought', ThoughtSchema)
-module.exports = Thought
+const Thoughts = model('Thoughts', ThoughtSchema)
+module.exports = Thoughts
