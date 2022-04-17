@@ -13,7 +13,7 @@ const userControl = {
   },
 
   // get one User by id
-  getUserById({ params }, res) {
+  getUserId({ params }, res) {
     Users.findOne({ _id: params.id })
       .populate({
         path: 'thoughts',
