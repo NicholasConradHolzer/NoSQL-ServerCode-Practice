@@ -14,7 +14,7 @@ router.route('/')
   .get(getAllthoughts)
   .post(addThought)
 
-router.route('/:ThoughtId')
+router.route('/:thoughtId')
   .get(getThoughtId)
   .put(updateThought)
   .delete(removeThought)

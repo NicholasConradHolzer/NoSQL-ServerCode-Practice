@@ -1,10 +1,25 @@
+
+   
+const { Types } = require('mongoose');
+
 const { Users , Thoughts } = require('../models');
 
 const userControl = {
   // get all Users
 getAllUsers(req, res) {
     Users.find({})
+    .populate({
+      path: 'thoughts',
+      select: '-__v'
+    })
+    // .populate('friends')
+    .populate({
+        path:'friends',
+        select:'-__v'
+    })
       .select('-__v')
+      
+      .sort({ _id: -1 })
       .then(dbUsersData => res.json(dbUsersData))
       .catch(err => {
         console.log(err);
@@ -15,17 +30,17 @@ getAllUsers(req, res) {
   // get one User by id
   getUserId({ params }, res) {
   Users.findOne(
-      { _id: params.id }
+      { _id: params.userId }
       )
       .populate({
         path: 'thoughts',
-        // select: '-__v'
+        select: '-__v'
       })
-      .populate('friends')
-      // .populate({
-      //     path:'friends',
-      //     select:'-__v'
-      // })
+      // .populate('friends')
+      .populate({
+          path:'friends',
+          select:'-__v'
+      })
       .select('-__v')
       .then(dbUsersData => {
         if (!dbUsersData){
@@ -47,7 +62,7 @@ createUsers({ body }, res) {
 
   // update Users by id
 updateUsers({ params, body }, res) {
-    Users.findOneAndUpdate({ _id: params.id }, 
+    Users.findOneAndUpdate({ _id: params.userId }, 
       body, { 
         new: true, 
         runValidators: true 
@@ -64,7 +79,7 @@ updateUsers({ params, body }, res) {
 
   // delete Users
 deleteUsers({ params, body }, res) {
-    Users.findOneAndDelete({ _id: params.id })
+    Users.findOneAndDelete({ _id: params.userId })
       .then(dbUsersData => {
         if (!dbUsersData) {
           res.status(404).json({

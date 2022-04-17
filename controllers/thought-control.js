@@ -14,7 +14,7 @@ const thoughtControl = {
   },
 
   getThoughtId({ params }, res) {
-    Thoughts.findOne({ _id: params.id })
+    Thoughts.findOne({ _id: params.thoughtId })
     .populate({
       path: 'reaction',
       select:'-__v'
@@ -49,7 +49,7 @@ const thoughtControl = {
 
   updateThought(req, res) {
     Thoughts.findOneAndUpdate({ 
-      _id: req.params.id }, {$set: req.body},
+      _id: req.params.thoughtId }, {$set: req.body},
       {runValidators:true, new:true}
     )
       // body, { new: true, runValidators: true })
@@ -65,7 +65,7 @@ const thoughtControl = {
 
   removeThought(req, res) {
   Thoughts.findOneAndDelete({ 
-    _id: params.id 
+    _id: params.thoughtId
   })
     .then(dbThoughtsData => {
       if (!dbThoughtsData) {
