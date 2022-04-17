@@ -4,7 +4,7 @@ const apiRoutes = require('./api');
 router.use('/api', apiRoutes);
 
 router.use((req, res) => {
-  res.status(404).send('404 Error!(index level)');
+  res.status(404).json({message: '404 Error!(index level)'});
 });
 
 module.exports = router;
