@@ -10,9 +10,9 @@ const UserSchema = new Schema({
     },
     email:{
         type: String,
-        required: true,
+        required: 'email address required',
         unique: true,
-        match: [/.+@.+\..+/]
+        match: [/.+@.+\..+/, "please enter a valid email addrerss"]
     },
     userSince:{
         type: Date,
@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     },
     thoughts:[{
         type: Schema.Types.ObjectId,
-        ref: 'Thought'
+        ref: 'Thoughts'
     }],
     friends:[{
         type: Schema.Types.ObjectId,

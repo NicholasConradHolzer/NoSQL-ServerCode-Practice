@@ -1,6 +1,42 @@
 const {Schema, model, Types} = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
-let ReactionSchema = require('./Reactions')
+// let ReactionSchema = require('./Reactions')
+
+
+// const {Schema, model, Types} = require('mongoose');
+// const dateFormat = require('../utils/dateFormat');
+// const { truckMonster } = require('fontawesome');
+
+const ReactionSchema = new Schema({
+    // reactionId: {
+    //     type: Schema.Types.ObjectId,
+    //     default: () => new Types.ObjectId()
+    // },
+    reactionBody:{
+        type: String,
+        required: "Reactions require Text Input",
+        trim: true,
+        maxlength: 280
+    },
+    username:{
+        type: String,
+        required: "Username is Required"
+    },
+    createdAt:{
+        type: Date,
+        default: Date.now,
+        get:(createdAtVal) => dateFormat(createdAtVal)
+    },
+},
+{
+    toJSON:{
+        getters: true
+    },
+    id: false
+});
+// const Reaction = model('Reaction', ReactionSchema)
+
+
 const ThoughtSchema = new Schema({
     thoughtId:{
         type: Schema.Types.ObjectId,
@@ -8,21 +44,17 @@ const ThoughtSchema = new Schema({
     },
     thoughtText:{
         type: String,
-        required: true,
+        required: "Thoughts require Text Input",
         minLength: 1,
-        maxlength: 280
+        maxlength: 280,
     },
     createdAt:{
         type: Date,
         default: Date.now,
         get: (createdAtVal) => dateFormat(createdAtVal)
     },
-    username:{
-        type: String,
-        required: true
+    reactions: [ReactionSchema],
     },
-    reactions:[ReactionSchema]
-},
 {
     toJSON:{
         virtuals: true,
@@ -30,7 +62,7 @@ const ThoughtSchema = new Schema({
     },
     id: false
 }
-)
+);
 
 ThoughtSchema.virtual('reactionCount').get(function(){
     return this.reactions.length})

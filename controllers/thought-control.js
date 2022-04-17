@@ -1,10 +1,10 @@
 // const req = require('express/lib/request');
-const {/*Reaction,*/ Thoughts, Users} = require('../models');
+const { Thoughts, Users} = require('../models');/*Reaction,*/
 
 const thoughtControl = {
 
   getAllthoughts(req, res) {
-    Thoughts.findAll({})
+    Thoughts.find({})
     .select('-__v')
     .then(dbUsersData => res.json(dbUsersData))
     .catch(err => {
