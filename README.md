@@ -1,4 +1,6 @@
 I fixed my mongoDb situation; as visable in the app Pwudget; however this one I probably should have just started from scratch instead of refactoring as at this point I have made it to this error :
+
+
 "
 TypeError: Cannot read properties of null (reading '1')
     at firstchar (C:\Users\nicho\OneDrive\Desktop\projectsVBC\weekly-challenges\nosqlweek\node_modules\body-parser\lib\types\json.js:176:37)
@@ -11,8 +13,11 @@ TypeError: Cannot read properties of null (reading '1')
     at endReadableNT (node:internal/streams/readable:1343:12)
     at processTicksAndRejections (node:internal/process/task_queues:83:21)
 "
+
+
 and continue to get repeated " Process exited with status 143" in my Heroku logs.
 Which is more than I could say when I started ...:
+
 
 https://think-social.herokuapp.com/
 
