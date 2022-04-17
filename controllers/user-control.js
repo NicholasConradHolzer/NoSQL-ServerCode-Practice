@@ -1,8 +1,4 @@
-
-   
-const { Types } = require('mongoose');
-
-const { Users , Thoughts } = require('../models');
+const { Users  } = require('../models');
 
 const userControl = {
   // get all Users
