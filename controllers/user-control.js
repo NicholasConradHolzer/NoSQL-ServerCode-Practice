@@ -5,7 +5,7 @@ const userControl = {
 getAllUsers(req, res) {
     Users.find({})
       .select('-__v')
-      .then(dbUserData => res.json(dbUserData))
+      .then(dbUsersData => res.json(dbUsersData))
       .catch(err => {
         console.log(err);
         res.sendStatus(400);
