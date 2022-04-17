@@ -54,9 +54,10 @@ getAllUsers(req, res) {
     .then(dbUsersData => {
       if (!dbUsersData){ 
         res.status(404).json({message:"no user found with this ID"})
-      } else {
+        return;
+      } 
         res.json(dbUsersData)}
-      })
+      )
     // .then(dbUsersData => {
     //     if (!dbUsersData){
     //       res.status(404).json({message:"no user found with this ID"})
@@ -80,7 +81,7 @@ createUsers({ body }, res) {
   // update Users by id
 updateUsers(req, res) {
     Users.findOneAndUpdate({ _id: req.params.userId }, 
-      body, { 
+      {$set: req.body}, { 
         new: true, 
         runValidators: true 
       })
