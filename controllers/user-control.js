@@ -4,57 +4,69 @@ const userControl = {
   // get all Users
 getAllUsers(req, res) {
     Users.find()
-    .populate({
-      path: 'thoughts',
-      select: '-__v'
-    })
-    // .populate('friends')
-    .populate({
-        path:'friends',
-        select:'-__v'
-    })
-      .select('-__v')
+    // .populate({
+    //   path: 'thoughts',
+    //   select: '-__v'
+    // })
+    // // .populate('friends')
+    // .populate({
+    //     path:'friends',
+    //     select:'-__v'
+    // })
+    //   .select('-__v')
       
-      .sort({ _id: -1 })
-      .then(dbUsersData => res.json(dbUsersData))
-      .catch(err => {
-        console.log(err);
-        res.sendStatus(400);
-      });
+    //   .sort({ _id: -1 })
+      .then(dbUsersData => {res.json(dbUsersData)})
+      // .catch(err => {
+      //   console.log(err);
+      //   res.sendStatus(400);
+      // });
   },
 
   // get one User by id
-  getUserId({ params }, res) {
+  getUserId(req, res) {
   Users.findOne(
-      { _id: params.userId }
+      { _id: req.params.userId }
       )
-      .populate({
-        path: 'thoughts',
-        select: '-__v'
-      })
-      // .populate('friends')
-      .populate({
-          path:'friends',
-          select:'-__v'
-      })
-      .select('-__v')
-      .then(dbUsersData => {
-        if (!dbUsersData){
-          res.status(404).json({
-            message:"no user found with this ID"})
-           return;}res.json(dbUsersData);})
-      .catch(err => {
-        console.log(err);
-        res.sendStatus(400).json(err);
-      });
+      // .populate({
+      //   path: 'thoughts',
+      //   select: '-__v'
+      // })
+      // // .populate('friends')
+      // .populate({
+      //     path:'friends',
+      //     select:'-__v'
+      // })
+      // .select('-__v')
+      // .then(dbUsersData => {
+      //   if (!dbUsersData){
+      //     res.status(404).json({
+      //       message:"no user found with this ID"})
+      //      return;}res.json(dbUsersData);})
+      // .catch(err => {
+      //   console.log(err);
+      //   res.sendStatus(400).json(err);
+      // });
+
+      .populate('friends')
+      .populate('Thoughts')
+
+    .then(dbUsersData => {res.json(dbUsersData)})
+
   },
 
   // createUsers
-createUsers({ body }, res) {
-    Users.create(body)
-      .then((dbUsersData) => res.json(dbUsersData))
-      .catch((err) => res.status(500).json(err));
-  },
+// createUsers({ body }, res) {
+//     Users.create(body)
+//       .then((dbUsersData) => res.json(dbUsersData))
+//       .catch((err) => res.status(500).json(err));
+//   },
+createUsers(req,res){
+  Users.create(req.body)
+    .then(dbUsersData => res.json(dbUsersData))
+    .catch(err => res.status(400).json(err));
+}
+
 
   // update Users by id
 updateUsers({ params, body }, res) {
