@@ -1,11 +1,5 @@
 const {Schema, model, Types} = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
-// let ReactionSchema = require('./Reactions')
-
-
-// const {Schema, model, Types} = require('mongoose');
-// const dateFormat = require('../utils/dateFormat');
-// const { truckMonster } = require('fontawesome');
 
 const ReactionSchema = new Schema({
     reactionId: {

@@ -1,53 +1,16 @@
-const { Users  } = require('../models');
+const { Users  } = require("../models/Users");
 
 const userControl = {
   // get all Users
 getAllUsers(req, res) {
     Users.find()
-    // .populate({
-    //   path: 'thoughts',
-    //   select: '-__v'
-    // })
-    // // .populate('friends')
-    // .populate({
-    //     path:'friends',
-    //     select:'-__v'
-    // })
-    //   .select('-__v')
-      
-    //   .sort({ _id: -1 })
       .then(dbUsersData => {res.json(dbUsersData)})
-      // .catch(err => {
-      //   console.log(err);
-      //   res.sendStatus(400);
-      // });
   },
 
-  // get one User by id
   getUserId(req, res) {
   Users.findOne(
       { _id: req.params.userId }
       )
-// .populate({
-          //   path: 'thoughts',
-          //   select: '-__v'
-          // })
-          // // .populate('friends')
-          // .populate({
-          //     path:'friends',
-          //     select:'-__v'
-          // })
-          // .select('-__v')
-          // .then(dbUsersData => {
-          //   if (!dbUsersData){
-          //     res.status(404).json({
-          //       message:"no user found with this ID"})
-          //      return;}res.json(dbUsersData);})
-          // .catch(err => {
-          //   console.log(err);
-          //   res.sendStatus(400).json(err);
-          // });
-
       .populate('friends')
       .populate('Thoughts')
 
@@ -58,11 +21,6 @@ getAllUsers(req, res) {
       } 
         res.json(dbUsersData)}
       )
-    // .then(dbUsersData => {
-    //     if (!dbUsersData){
-    //       res.status(404).json({message:"no user found with this ID"})
-    //       }
-    //     })
     .catch(err => {console.log(err);res.sendStatus(400).json(err);})
       },
   // createUsers
@@ -71,12 +29,6 @@ createUsers({ body }, res) {
       .then((dbUsersData) => res.json(dbUsersData))
       .catch((err) => res.status(500).json(err));
   },
-// createUsers(req,res) {
-//   Users.create(req.body)
-//     .then(dbUsersData => res.json(dbUsersData))
-//     .catch(err => res.status(400).json(err));
-// },
-
 
   // update Users by id
 updateUsers(req, res) {
@@ -96,7 +48,7 @@ updateUsers(req, res) {
   },
 
   // delete Users
-deleteUsers({ params, body }, res) {
+deleteUsers({ params}, res) {
     Users.findOneAndDelete({ _id: params.userId })
       .then(dbUsersData => {
         if (!dbUsersData) {
@@ -114,7 +66,6 @@ deleteUsers({ params, body }, res) {
     Users.findOneAndUpdate(
       { _id: params.userId },
       { $pull: { friends: params.friendId } },
-      // { new: true, runValidators: true }
     )
       .then(dbUserData => {
         if (!dbUserData) {
@@ -127,12 +78,9 @@ deleteUsers({ params, body }, res) {
   },
 
   removeFriend({ params }, res) {
-    // console.log(params)
 
     Users.findOneAndDelete(
       { _id: params.userId },
-      // { $pull: { friends: params.friendId  } },
-      // { new: true, runValidators: true }
     )
       .then(dbUsersData => { 
         if (!dbUsersData) {
