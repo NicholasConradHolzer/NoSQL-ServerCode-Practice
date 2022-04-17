@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const userControl = require('../../controllers/user-control')
 const {
   getAllUsers,
   getUserId,
@@ -7,7 +8,7 @@ const {
   deleteUsers,
   addFriend,
   removeFriend
-} = require('../../controllers/user-control');
+} = userControl;
 
 // /api/users
 router.route('/')
