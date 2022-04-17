@@ -13,7 +13,16 @@
     "compression": "^1.7.4",
     "express": "^4.17.3",
     "mongodb": "^4.5.0",
-    "mongoose": "^6.2.10"
+    "mongoose": "^6.3.0"
   },
-  "description": ""
+  "description": "I misallighned my MongoDB install during the last gorup project and have not gotten around to fixing it \r and im pressed for time and getting error messages so I do not have a video presentation today.",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicholasConradHolzer/NoSQL-ServerCode-Practice.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NicholasConradHolzer/NoSQL-ServerCode-Practice/issues"
+  },
+  "homepage": "https://github.com/NicholasConradHolzer/NoSQL-ServerCode-Practice#readme"
 }
