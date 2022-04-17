@@ -4,7 +4,7 @@ const {/*Reaction,*/ Thoughts, Users} = require('../models');
 const thoughtControl = {
 
   getAllthoughts(req, res) {
-    Thoughts.find({})
+    Thoughts.findAll({})
     .select('-__v')
     .then(dbUsersData => res.json(dbUsersData))
     .catch(err => {

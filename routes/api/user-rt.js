@@ -10,9 +10,9 @@ const {
 } = require('../../controllers/user-control');
 
 // /api/users
-// router.route('/')
-  // .get(getAllUsers)
-  // .post(createUsers)
+router.route('/')
+  .get(getAllUsers)
+  .post(createUsers)
 
 // /api/users/:id
 router.route('/:id')

@@ -10,9 +10,9 @@ const {
 } = require('../../controllers/thought-control');
 
 // /api/thoughts
-// router.route('/')
-  // .get(getAllthoughts)
-  // .post(addThought)
+router.route('/')
+  .get(getAllthoughts)
+  .post(addThought)
 
 router.route('/:ThoughtId')
   .get(getThoughtId)
