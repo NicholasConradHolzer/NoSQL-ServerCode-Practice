@@ -77,7 +77,7 @@ const thoughtControl = {
   // add reaction to thought
   addReaction(req, res) {
     Thoughts.findOneAndUpdate(
-      { _Id: params.thoughtId },
+      { _Id: req.params.thoughtId },
       { $push: { 
         reactions: {
         reactionBody: req.body.reactionBody,
