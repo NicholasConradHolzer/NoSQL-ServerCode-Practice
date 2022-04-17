@@ -6,16 +6,17 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/NoSQLdb ', {
+app.use(require('./routes'));
+// Use this to log mongo queries being executed!
+
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/thoughtDB', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
-// Use this to log mongo queries being executed!
 mongoose.set('debug', true);
 
-app.use(require('./routes'));
 
 app.listen(PORT, () => console.log(`Connected on localhost:${PORT}`));
